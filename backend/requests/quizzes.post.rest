@@ -1,0 +1,27 @@
+POST http://localhost:3001/quizzes
+Content-Type: application/json
+
+{
+  "title": "Development Quiz",
+  "questions": [
+    {
+      "type": "boolean",
+      "questionText": "Question 1",
+      "correctAnswer": "false"
+    },
+    {
+      "type": "input",
+      "questionText": "Question 2",
+      "correctAnswer": "Sequelize"
+    },
+    {
+      "type": "checkbox",
+      "questionText": "Question 3",
+      "options": [
+        { "optionText": "Option1", "isCorrect": true },
+        { "optionText": "Option2", "isCorrect": false },
+        { "optionText": "Option3", "isCorrect": true }
+      ]
+    }
+  ]
+}
