@@ -10,7 +10,7 @@ export const sequelize = new Sequelize({
 export const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
+    await sequelize.sync();
   } catch (error) {
     //eslint-disable-next-line no-console
     console.error('Unable to connect to the database:', error);

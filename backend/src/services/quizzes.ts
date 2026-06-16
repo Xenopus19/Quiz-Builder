@@ -62,4 +62,36 @@ const addNewQuiz = async (quizData: CreateQuizInput) => {
   });
 };
 
-export { getAllQuizzes, addNewQuiz };
+const getQuizById = async (id: string) => {
+  try {
+    const quiz = await Quiz.findByPk(id, {
+      include: [
+        {
+          model: Question,
+          as: 'questions',
+          include: [
+            {
+              model: Option,
+              as: 'options',
+            },
+          ],
+        },
+      ],
+    });
+
+    return quiz;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+const deleteQuizById = async (id: string) => {
+  try {
+    const deletedCount = await Quiz.destroy({ where: { id } });
+    return deletedCount;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export { getAllQuizzes, addNewQuiz, getQuizById, deleteQuizById };

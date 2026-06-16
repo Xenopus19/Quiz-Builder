@@ -1,0 +1,1 @@
+DELETE http://localhost:3001/quizzes/8a524179-5b14-4233-b4f9-abde96ffaff4
