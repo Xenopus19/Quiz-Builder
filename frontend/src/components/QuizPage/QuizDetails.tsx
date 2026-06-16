@@ -10,10 +10,9 @@ interface QuizDetailsProps {
 const QuizDetails = ({ quiz }: QuizDetailsProps) => {
   return (
     <div className="space-y-8 max-w-3xl mx-auto">
-      
       <div className="space-y-3">
-        <Link 
-          to="/quizzes" 
+        <Link
+          to="/quizzes"
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-indigo-600 tracking-wider uppercase transition-colors"
         >
           <ArrowLeft size={14} /> Back to all quizzes
@@ -26,16 +25,10 @@ const QuizDetails = ({ quiz }: QuizDetailsProps) => {
       </div>
 
       <div className="space-y-4">
-
         {quiz.questions.map((question, index) => (
-          <QuestionItem 
-            key={question.id || index} 
-            question={question} 
-            index={index} 
-          />
+          <QuestionItem key={question.id || index} question={question} index={index} />
         ))}
       </div>
-
     </div>
   );
 };

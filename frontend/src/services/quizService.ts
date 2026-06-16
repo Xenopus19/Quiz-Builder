@@ -30,7 +30,6 @@ export interface CreateQuizInput {
   questions: Omit<QuestionItem, 'id'>[];
 }
 
-
 export const QuizFrontService = {
   getAllQuizzes: async (): Promise<QuizItem[]> => {
     return apiClient.get('/quizzes');
@@ -46,5 +45,5 @@ export const QuizFrontService = {
 
   deleteQuiz: async (id: string): Promise<void> => {
     return apiClient.delete(`/quizzes/${id}`);
-  }
+  },
 };

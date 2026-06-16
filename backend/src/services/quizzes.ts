@@ -4,27 +4,23 @@ import type { CreateQuizInput } from '../schemas/quiz.schema.js';
 import { sequelize } from '../database.js';
 
 const getAllQuizzes = async () => {
-  try {
-    const quizzes = await Quiz.findAll({
-      attributes: [
-        'id',
-        'title',
-        'createdAt',
-        [
-          Sequelize.literal(`(
+  const quizzes = await Quiz.findAll({
+    attributes: [
+      'id',
+      'title',
+      'createdAt',
+      [
+        Sequelize.literal(`(
             SELECT COUNT(*)
             FROM questions AS qn
             WHERE qn.quiz_id = Quiz.id
           )`),
-          'questionsCount',
-        ],
+        'questionsCount',
       ],
-    });
+    ],
+  });
 
-    return quizzes;
-  } catch (error: any) {
-    throw error;
-  }
+  return quizzes;
 };
 
 const addNewQuiz = async (quizData: CreateQuizInput) => {
@@ -63,35 +59,27 @@ const addNewQuiz = async (quizData: CreateQuizInput) => {
 };
 
 const getQuizById = async (id: string) => {
-  try {
-    const quiz = await Quiz.findByPk(id, {
-      include: [
-        {
-          model: Question,
-          as: 'questions',
-          include: [
-            {
-              model: Option,
-              as: 'options',
-            },
-          ],
-        },
-      ],
-    });
+  const quiz = await Quiz.findByPk(id, {
+    include: [
+      {
+        model: Question,
+        as: 'questions',
+        include: [
+          {
+            model: Option,
+            as: 'options',
+          },
+        ],
+      },
+    ],
+  });
 
-    return quiz;
-  } catch (error: any) {
-    throw error;
-  }
+  return quiz;
 };
 
 const deleteQuizById = async (id: string) => {
-  try {
-    const deletedCount = await Quiz.destroy({ where: { id } });
-    return deletedCount;
-  } catch (error: any) {
-    throw error;
-  }
+  const deletedCount = await Quiz.destroy({ where: { id } });
+  return deletedCount;
 };
 
 export { getAllQuizzes, addNewQuiz, getQuizById, deleteQuizById };

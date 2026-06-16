@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Loader2, AlertCircle, Plus } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Loader2, AlertCircle } from 'lucide-react';
 import { QuizFrontService as quizService } from '../../services/quizService';
 import QuizCard from './QuizCard';
 
@@ -22,8 +21,8 @@ const AllQuizzes = () => {
         setError(null);
         const data = await quizService.getAllQuizzes();
         setQuizzes(data);
-      } catch (err: any) {
-        setError(err.message || 'Failed to fetch quizzes from the server.');
+      } catch (err: unknown) {
+        setError((err as Error).message || 'Failed to fetch quizzes from the server.');
       } finally {
         setIsLoading(false);
       }
@@ -36,14 +35,13 @@ const AllQuizzes = () => {
     try {
       await quizService.deleteQuiz(id);
       setQuizzes((prevQuizzes) => prevQuizzes.filter((quiz) => quiz.id !== id));
-    } catch (err: any) {
-      alert(err.message || 'Error executing deletion task.');
+    } catch (err: unknown) {
+      alert((err as Error).message || 'Error executing deletion task.');
     }
   };
 
   return (
     <div className="space-y-6">
-      
       <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div>
           <h1 className="text-2xl text-centerfont-extrabold tracking-tight text-slate-900 sm:text-3xl">
@@ -85,7 +83,6 @@ const AllQuizzes = () => {
           ))}
         </div>
       )}
-
     </div>
   );
 };

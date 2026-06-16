@@ -13,9 +13,7 @@ const CheckboxAnswer = ({ options }: CheckboxAnswerProps) => {
 
   const handleCheckboxToggle = (optIdx: number) => {
     setSelectedOptions((prev) =>
-      prev.includes(optIdx)
-        ? prev.filter((idx) => idx !== optIdx)
-        : [...prev, optIdx]
+      prev.includes(optIdx) ? prev.filter((idx) => idx !== optIdx) : [...prev, optIdx],
     );
   };
 
@@ -30,9 +28,11 @@ const CheckboxAnswer = ({ options }: CheckboxAnswerProps) => {
             onClick={() => handleCheckboxToggle(optIdx)}
             className={`
               flex items-center justify-between gap-3 p-3 rounded-xl border text-left transition-all cursor-pointer w-full
-              ${isSelected 
-                ? 'bg-indigo-50/60 border-indigo-300 text-indigo-900 font-medium' 
-                : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:bg-slate-100/70'}
+              ${
+                isSelected
+                  ? 'bg-indigo-50/60 border-indigo-300 text-indigo-900 font-medium'
+                  : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:bg-slate-100/70'
+              }
             `}
           >
             <div className="flex items-center gap-2.5 min-w-0">
@@ -43,7 +43,7 @@ const CheckboxAnswer = ({ options }: CheckboxAnswerProps) => {
               )}
               <span className="text-sm truncate">{option.optionText}</span>
             </div>
-            
+
             {isSelected && (
               <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 bg-indigo-100 text-indigo-700 rounded-md shrink-0">
                 Selected

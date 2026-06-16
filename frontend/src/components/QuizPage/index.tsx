@@ -19,8 +19,8 @@ const QuizPage = () => {
         setError(null);
         const data = await QuizFrontService.getQuizById(id);
         setQuiz(data);
-      } catch (err: any) {
-        setError(err.message || 'Failed to fetch quiz.');
+      } catch (err: unknown) {
+        setError((err as Error).message || 'Failed to fetch quiz.');
       } finally {
         setIsLoading(false);
       }
@@ -45,7 +45,10 @@ const QuizPage = () => {
           <AlertCircle className="shrink-0 text-red-500" size={22} />
           <div className="text-sm font-medium">{error || 'Quiz structure not found.'}</div>
         </div>
-        <Link to="/quizzes" className="flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700">
+        <Link
+          to="/quizzes"
+          className="flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+        >
           <ArrowLeft size={16} /> Back to all quizzes
         </Link>
       </div>

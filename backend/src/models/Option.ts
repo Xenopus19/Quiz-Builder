@@ -1,9 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import type {
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from "sequelize";
+import { Model, DataTypes } from 'sequelize';
+import type { InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 import { sequelize } from '../database.js';
 
 class Option extends Model<InferAttributes<Option>, InferCreationAttributes<Option>> {
@@ -25,7 +21,7 @@ Option.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: 'questions', 
+        model: 'questions',
         key: 'id',
       },
       onDelete: 'CASCADE',
@@ -41,8 +37,8 @@ Option.init(
   },
   {
     sequelize,
-    underscored: true, 
-    tableName: "options", 
+    underscored: true,
+    tableName: 'options',
     timestamps: false,
   },
 );

@@ -13,8 +13,8 @@ export const apiClient = {
     const response = await fetch(`${BASE_URL}${endpoint}`);
     return handleResponse(response);
   },
-  
-  post: async (endpoint: string, data: any) => {
+
+  post: async <T>(endpoint: string, data: T) => {
     const response = await fetch(`${BASE_URL}${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -28,5 +28,5 @@ export const apiClient = {
       method: 'DELETE',
     });
     return handleResponse(response);
-  }
+  },
 };

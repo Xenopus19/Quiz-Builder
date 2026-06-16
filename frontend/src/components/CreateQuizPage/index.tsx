@@ -13,12 +13,12 @@ const CreateQuizPage = () => {
     try {
       setIsSubmitting(true);
       setError(null);
-      
+
       await QuizFrontService.createQuiz(formData);
-      
+
       navigate('/quizzes');
-    } catch (err: any) {
-      setError(err.message || 'Failed to create quiz schema templates.');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'Failed to create quiz schema templates.');
     } finally {
       setIsSubmitting(false);
     }
@@ -27,8 +27,8 @@ const CreateQuizPage = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6 pb-12">
       <div className="space-y-2">
-        <Link 
-          to="/quizzes" 
+        <Link
+          to="/quizzes"
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-indigo-600 tracking-wider uppercase transition-colors"
         >
           <ArrowLeft size={14} /> Back to Dashboard
@@ -56,7 +56,9 @@ const CreateQuizPage = () => {
         <div className="fixed inset-0 bg-slate-900/10 backdrop-blur-[1px] flex flex-col items-center justify-center gap-3 z-50">
           <div className="bg-white px-6 py-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
             <Loader2 className="animate-spin text-indigo-600" size={24} />
-            <span className="text-sm font-semibold text-slate-700">Writing database records...</span>
+            <span className="text-sm font-semibold text-slate-700">
+              Writing database records...
+            </span>
           </div>
         </div>
       )}

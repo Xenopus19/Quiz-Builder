@@ -29,7 +29,6 @@ export const connectDB = async () => {
     await sequelize.sync();
     await addTestData();
   } catch (error) {
-    //eslint-disable-next-line no-console
     console.error('Unable to connect to the database:', error);
     process.exit(1);
   }

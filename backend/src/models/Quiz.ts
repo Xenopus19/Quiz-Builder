@@ -1,11 +1,7 @@
-import { Model, DataTypes } from "sequelize";
-import type {
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from "sequelize";
-import {sequelize} from '../database.js';
-import type { Question } from "./index.js";
+import { Model, DataTypes } from 'sequelize';
+import type { InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
+import { sequelize } from '../database.js';
+import type { Question } from './index.js';
 
 class Quiz extends Model<InferAttributes<Quiz>, InferCreationAttributes<Quiz>> {
   declare id: CreationOptional<string>;
@@ -21,7 +17,7 @@ Quiz.init(
       primaryKey: true,
       allowNull: false,
     },
-    title  : {
+    title: {
       type: DataTypes.TEXT,
       allowNull: false,
       unique: true,
@@ -34,8 +30,8 @@ Quiz.init(
   {
     sequelize,
     underscored: true,
-    tableName: "quizzes",
-    timestamps: false
+    tableName: 'quizzes',
+    timestamps: false,
   },
 );
 

@@ -17,7 +17,6 @@ const QuizCard = ({ id, title, questionsCount, onDelete }: QuizCardProps) => {
 
   return (
     <div className="group relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-200 flex items-start justify-between gap-4">
-      
       <Link
         to={`/quizzes/${id}`}
         className="absolute inset-0 z-0 rounded-2xl cursor-pointer"
@@ -28,7 +27,7 @@ const QuizCard = ({ id, title, questionsCount, onDelete }: QuizCardProps) => {
         <h3 className="font-bold text-lg text-slate-800 tracking-tight truncate group-hover:text-indigo-600 transition-colors">
           {title}
         </h3>
-        
+
         <div className="flex items-center gap-1.5 text-sm font-medium text-slate-500 bg-slate-50 px-3 py-1.5 rounded-xl w-fit border border-slate-100">
           <HelpCircle size={16} className="text-slate-400" />
           <span>
@@ -44,7 +43,6 @@ const QuizCard = ({ id, title, questionsCount, onDelete }: QuizCardProps) => {
       >
         <Trash2 size={20} />
       </button>
-
     </div>
   );
 };

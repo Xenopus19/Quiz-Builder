@@ -3,13 +3,14 @@ import { FormOptionsBuilder } from './FormOptionsBuilder';
 import { type CreateQuizInput } from '../../services/quizService';
 
 type FormQuestion = CreateQuizInput['questions'][number];
+type QuestionType = 'boolean' | 'input' | 'checkbox';
 
 interface FormQuestionCardProps {
   question: FormQuestion;
   index: number;
   onRemove: () => void;
   onUpdateText: (text: string) => void;
-  onTypeChange: (newType: 'boolean' | 'input' | 'checkbox') => void;
+  onTypeChange: (newType: QuestionType) => void;
   onUpdateField: (field: Partial<FormQuestion>) => void;
 }
 
@@ -21,6 +22,12 @@ export const FormQuestionCard = ({
   onTypeChange,
   onUpdateField,
 }: FormQuestionCardProps) => {
+  const typeButtons: { id: QuestionType; label: string; icon: typeof ToggleLeft }[] = [
+    { id: 'boolean', label: 'True/False', icon: ToggleLeft },
+    { id: 'input', label: 'Text Input', icon: Type },
+    { id: 'checkbox', label: 'Checkbox', icon: ListChecks },
+  ];
+
   return (
     <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -29,17 +36,15 @@ export const FormQuestionCard = ({
         </span>
 
         <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-          {[
-            { id: 'boolean', label: 'True/False', icon: ToggleLeft },
-            { id: 'input', label: 'Text Input', icon: Type },
-            { id: 'checkbox', label: 'Checkbox', icon: ListChecks },
-          ].map((t) => (
+          {typeButtons.map((t) => (
             <button
               key={t.id}
               type="button"
-              onClick={() => onTypeChange(t.id as any)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${
-                question.type === t.id ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-500'
+              onClick={() => onTypeChange(t.id)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition-all ${
+                question.type === t.id
+                  ? 'bg-white text-indigo-600 shadow-sm'
+                  : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               <t.icon size={14} />
@@ -51,7 +56,7 @@ export const FormQuestionCard = ({
         <button
           type="button"
           onClick={onRemove}
-          className="text-slate-400 hover:text-red-600 p-1.5 cursor-pointer"
+          className="text-slate-400 hover:text-red-600 p-1.5 cursor-pointer rounded-lg hover:bg-red-50 transition-colors"
         >
           <Trash2 size={16} />
         </button>
@@ -67,7 +72,7 @@ export const FormQuestionCard = ({
           onChange={(e) => onUpdateText(e.target.value)}
           required
           placeholder="Type your question statement..."
-          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+          className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 focus:bg-white transition-all"
         />
       </div>
 
@@ -79,10 +84,10 @@ export const FormQuestionCard = ({
                 key={val}
                 type="button"
                 onClick={() => onUpdateField({ correctAnswer: val })}
-                className={`px-4 py-2 rounded-xl text-xs font-bold border cursor-pointer ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold border cursor-pointer transition-all ${
                   question.correctAnswer === val
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-slate-50 text-slate-600'
+                    ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm'
+                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
                 }`}
               >
                 {val}
@@ -100,7 +105,7 @@ export const FormQuestionCard = ({
             onChange={(e) => onUpdateField({ correctAnswer: e.target.value })}
             required
             placeholder="Correct answer"
-            className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-emerald-700 font-medium"
+            className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-emerald-700 font-medium focus:outline-none focus:border-indigo-500 focus:bg-white transition-all"
           />
         </div>
       )}
