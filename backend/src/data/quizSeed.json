@@ -1,0 +1,25 @@
+{
+  "title": "Node.js & Databases Quiz",
+  "questions": [
+    {
+      "type": "boolean",
+      "questionText": "Is SQLite a serverless database engine?",
+      "correctAnswer": "true"
+    },
+    {
+      "type": "input",
+      "questionText": "What ORM are we currently using in this backend layout?",
+      "correctAnswer": "Sequelize"
+    },
+    {
+      "type": "checkbox",
+      "questionText": "Which of the following are valid SQL constraints?",
+      "options": [
+        { "optionText": "PRIMARY KEY", "isCorrect": true },
+        { "optionText": "FOREIGN KEY", "isCorrect": true },
+        { "optionText": "DELETE ALL", "isCorrect": false },
+        { "optionText": "NOT NULL", "isCorrect": true }
+      ]
+    }
+  ]
+}

@@ -5,11 +5,13 @@ import type {
   CreationOptional,
 } from "sequelize";
 import {sequelize} from '../database.js';
+import type { Question } from "./index.js";
 
 class Quiz extends Model<InferAttributes<Quiz>, InferCreationAttributes<Quiz>> {
   declare id: CreationOptional<string>;
   declare title: string;
   declare createdAt: CreationOptional<Date>;
+  declare questions?: Question[];
 }
 Quiz.init(
   {
